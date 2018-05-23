@@ -5,7 +5,13 @@
 using namespace std;
 
 string random_code_gen() {
-    vector<string> colors = {"r", "y", "b", "g", "o", "p"};
+    vector<string> colors;
+    colors.push_back("r");
+    colors.push_back("y");
+    colors.push_back("b");
+    colors.push_back("g");
+    colors.push_back("o");
+    colors.push_back("p");
     string code = "";
     for (int i = 0; i < 4; ++i) {
         code += colors[rand() * 6];
@@ -51,7 +57,9 @@ vector<int> check_guess(string user, string comp) {
     // returns the red and white hints
     int red = 0;
     int white = 0;
-    vector<int> result = {0,0};
+    vector<int> result;
+    result.push_back(0);
+    result.push_back(0);
     for (int i = 0; i < 4; ++i) {
         if (user[i] == comp[i]) {
             ++red;
