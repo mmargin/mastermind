@@ -37,6 +37,7 @@ string user_input() {
         << endl;
     cout << "What is your guess?" << endl;
     cin >> guess;
+    return guess;
 }
 bool check_validity(const string & str) {
     // checks to see if all the colors are valid
