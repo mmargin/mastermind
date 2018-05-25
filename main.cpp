@@ -85,11 +85,10 @@ vector<int> check_guess(string user, string comp) {
             if (user.find(comp[i])) {
                 ++white;
                 user[i] = 'x';
-                comp[i] = 'x';
             }
         }
     }
-    cout << "Your guess earned " << red << " red and " << white << " white" << endl;
+    cout << "Your guess earned " << red << " red and " << white << " white!" << endl;
     result[0] = red;
     result[1] = white;
     return result;
