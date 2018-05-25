@@ -1,22 +1,27 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include  <cstdlib>
+#include <stdlib.h>
+#include <time.h>
 using namespace std;
 
+int randHelper(int min, int max) {
+   return rand() % max + min;
+}
+
 string random_code_gen() {
-    vector<string> colors;
-    colors.push_back("r");
-    colors.push_back("y");
-    colors.push_back("b");
-    colors.push_back("g");
-    colors.push_back("o");
-    colors.push_back("p");
-    string code = "";
+    vector<char> colors;
+    colors.push_back('r');
+    colors.push_back('y');
+    colors.push_back('b');
+    colors.push_back('g');
+    colors.push_back('o');
+    colors.push_back('p');
+    string code = "xxxx";
     for (int i = 0; i < 4; ++i) {
-        code += colors[rand() * 6];
+        code[i] = colors[randHelper(0, 6)];     
     }
-    cout << code;
+    cout << code << endl;
     return code;
 
 }
@@ -46,11 +51,17 @@ bool check_validity(const string & str) {
         for (int i = 0; i < guess_size; ++i) {
             if (str[i] != 'r' && str[i] != 'y' && str[i] != 'b' && str[i] != 'g'
                 && str[i] != 'o' && str[i] != 'p') {
+                cout << "That's not a valid move! Use the reserved characters ";
+                cout << "Don't worry, this guess won't count as a point. Try again!" 
+                     << endl;
                 return false;
             }
         }
         return true;
     }
+    cout << "That's not a valid move! Please use 4 characters in your guess. ";
+    cout << "Don't worry, this guess won't count as a point. Try again!" 
+         << endl;
     return false;
 }
 
@@ -73,36 +84,47 @@ vector<int> check_guess(string user, string comp) {
         if (comp[i] != 'x') {
             if (user.find(comp[i])) {
                 ++white;
+                user[i] = 'x';
+                comp[i] = 'x';
             }
         }
     }
-    result.push_back(red);
-    result.push_back(white);
+    cout << "Your guess earned " << red << " red and " << white << " white" << endl;
+    result[0] = red;
+    result[1] = white;
     return result;
 }
 
-void win_game(int red, int total) {
+void win_game(int red, int & total, bool & game_won, string & user_guess) {
     if (red == 4) {
         cout << "Congrats you have guessed correctly! You win!" << endl;
+        ++total;
         cout << "You guessed in " << total << " tries!" << endl;
+        game_won = true;
     }
     else {
-        cout << "You're getting closer, try again!";
+        cout << "You're getting closer, try again!" << endl;
+        user_guess = user_input();
         ++total;
     }
 }
 int main() {
     int tries = 0;
+    srand(time(0));
     bool game_won = false;
     start();
     string computer_guess = random_code_gen();
-    // while loop so that it repeats until valid but also to keep adding up
+    string user_guess = user_input();
     while (!game_won) {
-        string user_guess = user_input();
-        while (check_validity(user_guess)) {
+        if (!check_validity(user_guess)) {
+            user_guess = user_input();
+        }
+        else {
             vector<int> tot = check_guess(user_guess, computer_guess);
-            win_game(tot[0], tries);
+            win_game(tot[0], tries, game_won, user_guess);
         }
     }
     return 0;
 }
+
+//yypbyypb
