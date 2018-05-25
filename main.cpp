@@ -23,7 +23,6 @@ string random_code_gen() {
     }
     cout << code << endl;
     return code;
-
 }
 
 void start() {
@@ -82,9 +81,10 @@ vector<int> check_guess(string user, string comp) {
     // now you should take anything that isn't 'x' in comp and see if you find in user
     for (int i = 0; i < 4; ++i) {
         if (comp[i] != 'x') {
-            if (user.find(comp[i])) {
+            int index = user.find(comp[i]);
+            if (index != -1) {
                 ++white;
-                user[i] = 'x';
+                user[index] = 'x';
             }
         }
     }
@@ -125,5 +125,3 @@ int main() {
     }
     return 0;
 }
-
-//yypbyypb
