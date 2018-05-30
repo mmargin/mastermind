@@ -64,13 +64,13 @@ bool check_validity(const string & str) {
     return false;
 }
 
-vector<int> check_guess(string user, string comp) {
-    // returns the red and white hints
-    int red = 0;
-    int white = 0;
-    vector<int> result;
-    result.push_back(0);
-    result.push_back(0);
+void check_guess(string user, string comp, int & red, int & white) {
+    // no longer returns vector<int> of the red and white hints
+    red = 0;
+    white = 0;
+    //vector<int> result;
+    //result.push_back(0);
+    //result.push_back(0);
     for (int i = 0; i < 4; ++i) {
         if (user[i] == comp[i]) {
             ++red;
@@ -89,9 +89,10 @@ vector<int> check_guess(string user, string comp) {
         }
     }
     cout << "Your guess earned " << red << " red and " << white << " white!" << endl;
-    result[0] = red;
-    result[1] = white;
-    return result;
+    //result[0] = red;
+    //result[1] = white;
+    //return result;
+
 }
 
 void win_game(int red, int & total, bool & game_won, string & user_guess) {
@@ -109,6 +110,8 @@ void win_game(int red, int & total, bool & game_won, string & user_guess) {
 }
 int main() {
     int tries = 0;
+    int red = 0;
+    int white = 0;
     srand(time(0));
     bool game_won = false;
     start();
@@ -119,8 +122,8 @@ int main() {
             user_guess = user_input();
         }
         else {
-            vector<int> tot = check_guess(user_guess, computer_guess);
-            win_game(tot[0], tries, game_won, user_guess);
+            check_guess(user_guess, computer_guess, red, white);
+            win_game(red, tries, game_won, user_guess);
         }
     }
     return 0;

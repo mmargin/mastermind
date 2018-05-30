@@ -2,6 +2,11 @@
     "files.associations": {
         "iosfwd": "cpp",
         "iterator": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "system_error": "cpp",
+        "__bit_reference": "cpp",
+        "algorithm": "cpp",
+        "string": "cpp",
+        "__locale": "cpp"
     }
 }
