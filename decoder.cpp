@@ -13,28 +13,32 @@ bool checkValid(int red, int white) {
 }
 void takeInput(int & red, int & white) {
     char misc;
-    cout << "Enter the red value followed by a comma and then the white value" 
+    cout << "Enter the red value followed by a comma and then the white value!" 
          << endl;
     cin >> red;
     cin >> misc;
     cin >> white;
 }
-void playGame(vector<Guess> & tries) {
-    Guess g;
-    int r = 0;
-    int w = 0;
-    cout << g.code; // code part under construction
-    takeInput(r, w);
-
-    if (checkValid(r, w)) {
-        g.red = r;
-        g.white = w;
-        tries.push_back(g);
+void playGame(vector<Guess> & tries, int & total_red) {
+    while (total_red != 4) {
+        Guess g;
+        int r = 0;
+        int w = 0;
+        cout << g.code; // code part under construction
+        takeInput(r, w);
+        if (checkValid(r, w)) {
+            g.red = r;
+            total_red = r;
+            g.white = w;
+            tries.push_back(g);
+        }
     }
-
+    cout << "Yay I guessed in " << tries.size() << " tries!" << endl;
 }
 
 int main() {
+    int red = 0;
     vector<Guess> attempts;
+    playGame(attempts, red);
     return 0;
 }
