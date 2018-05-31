@@ -88,18 +88,19 @@ void check_guess(string user, string comp, int & red, int & white) {
             }
         }
     }
-    cout << "Your guess earned " << red << " red and " << white << " white!" << endl;
+    cout << "Your guess earned " << red << " red and " << white << " white!" 
+         << endl;
     //result[0] = red;
     //result[1] = white;
     //return result;
-
 }
 
 void win_game(int red, int & total, bool & game_won, string & user_guess) {
     if (red == 4) {
         cout << "Congrats you have guessed correctly! You win!" << endl;
         ++total;
-        cout << "You guessed in " << total << " tries!" << endl;
+        cout << "You guessed in " << total << " " 
+             << ((total == 1)? "try" : "tries") << "!" << endl;
         game_won = true;
     }
     else {
