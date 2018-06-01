@@ -3,11 +3,33 @@
 #include  <iostream>
 using namespace std;
 
-struct Guess { //
+struct Guess {
     string code;
     int red = 0;
     int white = 0;
 };
+vector<char> createColorVector() {
+    vector<char> colors;
+    colors.push_back('r');
+    colors.push_back('y');
+    colors.push_back('b');
+    colors.push_back('g');
+    colors.push_back('o');
+    colors.push_back('p');
+    return colors;
+}
+void sameColor(const vector<char> & colors) {
+    string code;
+    int r = 0;
+    int w = 0;
+    for (int i = 0; i < colors.size(); ++i) {
+        for (int j = 0; j < 4; ++j) {
+            code += colors[i];
+        }
+        cout << code;
+        takeInput(r, w);
+    }
+}
 bool checkValid(int red, int white) {
     return (red >= 0 && white >= 0 && red + white <= 4);
 }
