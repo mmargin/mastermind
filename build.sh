@@ -6,5 +6,5 @@
 # what you want to run in this build so that you don't have to worry in terminal
 # you may add to this list ie. decoder.cpp
 
-g++ -Wall coder.cpp -o coder.exe
-g++ -Wall decoder.cpp -o decoder.exe
+g++ -Wall -std=c++11 coder.cpp -o coder.exe
+g++ -Wall -std=c++11 decoder.cpp -o decoder.exe

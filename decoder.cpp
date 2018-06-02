@@ -53,6 +53,7 @@ void sameColor(const vector<char> & colors) {
     }
     // what do we know? we know how many of each color in the code
     // map has counts of distinct colors
+    
 }
 bool checkValid(int red, int white) {
     return (red >= 0 && white >= 0 && red + white <= 4);
