@@ -30,45 +30,52 @@ void takeInput(int & red, int & white) {
     cin >> white;
     assert(white >= 0 && white <= 4);
 }
-void sameColor(const vector<char> & colors) {
-    // byrg
+bool checkValid(int red, int white) {
+    return (red >= 0 && white >= 0 && red + white <= 4);
+}
+map<char,int> sameColor(const vector<char> & colors) {
     map<char,int> codeColors;
+    int totRed = 0;
     for (int i = 0; i < colors.size(); ++i) {
         string code(4, colors[i]);
-        // rrrr
-        // yyyy
         cout << code << endl;
         int r = 0;
         int w = 0;
         takeInput(r, w);
-        // 1,0
-        // r = 1 w = 0
         assert(w == 0);
         if (r == 4) {
             break;
         }
         else if (r > 0) {
+            totRed += r;
             codeColors[colors[i]] = r;
+        }
+        if (totRed == 4) {
+            break;
         }
     }
     // what do we know? we know how many of each color in the code
     // map has counts of distinct colors
-    
+    return codeColors;
 }
-bool checkValid(int red, int white) {
-    return (red >= 0 && white >= 0 && red + white <= 4);
-}
+void playGame(vector<Guess> & tries, int & current_red, map<char,int> & codeColors) {
+    while (current_red != 4) {
+        if (tries.size() > 1) {
 
-void playGame(vector<Guess> & tries, int & total_red) {
-    while (total_red != 4) {
+        }
         Guess g;
+        for (auto & x : codeColors) { // create a code that has all the right colors
+            for (int i = 0; i < x.second; ++i) {
+                g.code += x.first;
+            }
+        }
         int r = 0;
         int w = 0;
-        cout << g.code; // code part under construction
+        cout << g.code << endl;
         takeInput(r, w);
         if (checkValid(r, w)) {
             g.red = r;
-            total_red = r;
+            current_red = r;
             g.white = w;
             tries.push_back(g);
         }
@@ -78,7 +85,9 @@ void playGame(vector<Guess> & tries, int & total_red) {
 
 int main() {
     int red = 0;
-    vector<Guess> attempts;
-    playGame(attempts, red);
+    vector<Guess> attempts; // + the same color ones you automatically did
+    vector<char> colorPossibilities = createColorVector();
+    map<char,int> codeColorsUsed = sameColor(colorPossibilities);
+    playGame(attempts, red, codeColorsUsed);
     return 0;
 }
